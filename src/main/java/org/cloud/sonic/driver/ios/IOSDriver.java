@@ -18,6 +18,7 @@ package org.cloud.sonic.driver.ios;
 
 import com.alibaba.fastjson.JSONObject;
 import org.cloud.sonic.driver.common.enums.PasteboardType;
+import org.cloud.sonic.driver.common.models.WdaDeviceInfo;
 import org.cloud.sonic.driver.common.models.WindowSize;
 import org.cloud.sonic.driver.common.tool.RespHandler;
 import org.cloud.sonic.driver.common.tool.SonicRespException;
@@ -91,6 +92,10 @@ public class IOSDriver {
      */
     public WdaClient getWdaClient() {
         return wdaClient;
+    }
+
+    public WdaDeviceInfo getWdaDeviceInfo() throws SonicRespException {
+        return wdaClient.getWdaDeviceInfo();
     }
 
     /**

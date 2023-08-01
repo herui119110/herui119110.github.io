@@ -17,6 +17,7 @@
 package org.cloud.sonic.driver.ios.service;
 
 import com.alibaba.fastjson.JSONObject;
+import org.cloud.sonic.driver.common.models.WdaDeviceInfo;
 import org.cloud.sonic.driver.common.models.WindowSize;
 import org.cloud.sonic.driver.common.tool.Logger;
 import org.cloud.sonic.driver.common.tool.RespHandler;
@@ -110,4 +111,6 @@ public interface WdaClient {
     void setAppiumSettings(JSONObject settings) throws SonicRespException;
 
     void swipe(double fromX, double fromY, double toX, double toY, double duration) throws SonicRespException;
+
+    WdaDeviceInfo getWdaDeviceInfo() throws SonicRespException;
 }

@@ -19,6 +19,7 @@ package org.cloud.sonic.driver.ios;
 import com.alibaba.fastjson.JSONObject;
 import org.cloud.sonic.driver.common.enums.PasteboardType;
 import org.cloud.sonic.driver.common.models.ElementRect;
+import org.cloud.sonic.driver.common.models.WdaDeviceInfo;
 import org.cloud.sonic.driver.common.models.WindowSize;
 import org.cloud.sonic.driver.common.tool.SonicRespException;
 import org.cloud.sonic.driver.ios.enums.*;
@@ -310,6 +311,14 @@ public class IOSDriverTest {
         IOSElement element2 = iosDriver.findElement(IOSSelector.ACCESSIBILITY_ID, "QDII");
         System.out.println(element2.getUniquelyIdentifies() + ",isDisplayed=" + element2.isDisplayed());
         System.out.println(element2.getUniquelyIdentifies() + ",rect=" + element2.getRect());
+    }
+
+
+    @Test
+    public void testWdaStatus() throws SonicRespException {
+        WdaDeviceInfo wdaDeviceInfo = iosDriver.getWdaDeviceInfo();
+        System.out.println(wdaDeviceInfo);
+
     }
 
     @AfterClass

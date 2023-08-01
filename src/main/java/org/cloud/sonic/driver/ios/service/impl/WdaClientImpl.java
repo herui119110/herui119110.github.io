@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.cloud.sonic.driver.common.models.BaseResp;
 import org.cloud.sonic.driver.common.models.SessionInfo;
+import org.cloud.sonic.driver.common.models.WdaDeviceInfo;
 import org.cloud.sonic.driver.common.models.WindowSize;
 import org.cloud.sonic.driver.common.tool.Logger;
 import org.cloud.sonic.driver.common.tool.RespHandler;
@@ -527,6 +528,35 @@ public class WdaClientImpl implements WdaClient {
             logger.error("perform swipe %s failed.", data.toString());
             throw new SonicRespException(b.getErr().getMessage());
         }
+    }
+
+    @Override
+    public WdaDeviceInfo getWdaDeviceInfo() throws SonicRespException {
+        BaseResp b = respHandler.getResp(HttpUtil.createGet(remoteUrl + "/status")
+        );
+        if (b.getErr() == null) {
+            logger.info("get status %s.", b.getValue().toString());
+            WdaDeviceInfo wdaDeviceInfo = new WdaDeviceInfo();
+            JSONObject jsonObject = JSON.parseObject(b.getValue().toString());
+
+            wdaDeviceInfo.setState(jsonObject.getString("state"));
+
+
+            JSONObject os = jsonObject.getJSONObject("os");
+            if (os != null) wdaDeviceInfo.setIosVersion(os.get("version").toString());
+
+            JSONObject ios = jsonObject.getJSONObject("ios");
+            if (ios != null) wdaDeviceInfo.setIp(ios.getString("ip"));
+
+            wdaDeviceInfo.setReady(jsonObject.getBoolean("ready"));
+
+
+            return wdaDeviceInfo;
+        } else {
+            logger.error("get status failed.");
+            throw new SonicRespException(b.getErr().getMessage());
+        }
+
     }
 
 }
