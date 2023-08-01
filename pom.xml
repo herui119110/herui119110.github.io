@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.soniccloudorg</groupId>
-    <artifactId>sonic-driver-core</artifactId>
-    <version>SONIC_VERSION</version>
+    <groupId>io.github.herui119110</groupId>
+    <artifactId>sonic-driver-core-pro</artifactId>
+    <version>2.0</version>
 
-    <name>sonic-driver-core</name>
-    <description>The Sonic Project UIAutomation Driver Core for Android, iOS, Windows, Mac and so on.</description>
+    <name>sonic-driver-core-pro</name>
+    <description>sonic-driver-core-pro</description>
     <url>https://github.com/SonicCloudOrg/sonic-driver-core</url>
 
     <properties>
@@ -22,15 +22,15 @@
 
     <scm>
         <tag>main</tag>
-        <url>https://github.com/SonicCloudOrg/sonic-driver-core</url>
-        <connection>https://github.com/SonicCloudOrg/sonic-driver-core</connection>
-        <developerConnection>https://github.com/SonicCloudOrg/sonic-driver-core</developerConnection>
+        <url>https://github.com/herui119110/sonic-driver-core-pro.git</url>
+        <connection>https://github.com/herui119110/sonic-driver-core-pro.git</connection>
+        <developerConnection>https://github.com/herui119110/sonic-driver-core-pro.git</developerConnection>
     </scm>
 
     <licenses>
         <license>
             <name>APACHE2</name>
-            <url>https://github.com/SonicCloudOrg/sonic-driver-core/blob/main/LICENSE</url>
+            <url>https://github.com/herui119110/sonic-driver-core-pro/blob/main/LICENSE</url>
         </license>
     </licenses>
 
@@ -52,8 +52,8 @@
 
     <developers>
         <developer>
-            <name>SonicCloudOrg</name>
-            <email>soniccloudorg@163.com</email>
+            <name>mincycler</name>
+            <email>15107736957@163.com</email>
             <timezone>+8</timezone>
             <roles>
                 <role>Developer</role>
@@ -189,17 +189,7 @@
                     <check/>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
+
         </plugins>
     </build>
 </project>
