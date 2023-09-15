@@ -559,4 +559,20 @@ public class WdaClientImpl implements WdaClient {
 
     }
 
+    @Override
+    public Integer checkExistAlert() throws SonicRespException {
+        BaseResp b = respHandler.getResp(HttpUtil.createGet(remoteUrl + "/alert/text")
+        );
+        System.out.println(b);
+        if (b.getErr().getMessage().contains("not open")) {
+            return 2;
+        } else if (b.getValue() != null) {
+            return 1;
+        } else {
+            return 3;
+        }
+
+    }
+
+
 }

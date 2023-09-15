@@ -97,6 +97,9 @@ public class IOSDriver {
     public WdaDeviceInfo getWdaDeviceInfo() throws SonicRespException {
         return wdaClient.getWdaDeviceInfo();
     }
+    public Integer    checkExistAlert()throws SonicRespException{
+        return wdaClient.checkExistAlert();
+    }
 
     /**
      * get wda sessionId.

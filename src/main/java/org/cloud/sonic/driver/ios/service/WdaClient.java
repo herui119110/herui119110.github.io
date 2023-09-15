@@ -113,4 +113,6 @@ public interface WdaClient {
     void swipe(double fromX, double fromY, double toX, double toY, double duration) throws SonicRespException;
 
     WdaDeviceInfo getWdaDeviceInfo() throws SonicRespException;
+
+    Integer checkExistAlert()throws SonicRespException;
 }
