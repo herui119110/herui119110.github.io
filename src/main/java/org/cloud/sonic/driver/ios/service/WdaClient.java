@@ -115,4 +115,6 @@ public interface WdaClient {
     WdaDeviceInfo getWdaDeviceInfo() throws SonicRespException;
 
     Integer checkExistAlert()throws SonicRespException;
+
+    Integer closeAlert() throws SonicRespException;
 }

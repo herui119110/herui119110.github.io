@@ -16,6 +16,7 @@
  */
 package org.cloud.sonic.driver.ios.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.http.Method;
 import com.alibaba.fastjson.JSON;
@@ -563,8 +564,8 @@ public class WdaClientImpl implements WdaClient {
     public Integer checkExistAlert() throws SonicRespException {
         BaseResp b = respHandler.getResp(HttpUtil.createGet(remoteUrl + "/alert/text")
         );
-        System.out.println(b);
-        if (b.getErr().getMessage().contains("not open")) {
+        if (b.getErr() != null && StrUtil.isNotBlank(b.getErr().getMessage()) && b.getErr().getMessage().contains("not open")) {
+
             return 2;
         } else if (b.getValue() != null) {
             return 1;
@@ -574,5 +575,19 @@ public class WdaClientImpl implements WdaClient {
 
     }
 
+    @Override
+    public Integer closeAlert() throws SonicRespException {
+        BaseResp b = respHandler.getRespV2(HttpUtil.createPost(remoteUrl + "/alert/dismiss"));
+        if (b.getCode().equals(200)) {
+
+            return 1;
+        }
+        if (b.getCode().equals(404) && StrUtil.isNotBlank(b.getErr().getError()) && b.getErr().getError().contains("no such alert")) {
+            return 2;
+
+
+        }
+        return 3;
+    }
 
 }

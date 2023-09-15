@@ -325,6 +325,11 @@ public class IOSDriverTest {
     public void testWdaAlertExist() throws SonicRespException {
         iosDriver.checkExistAlert();
     }
+    @Test
+    public void testCloseAlert() throws SonicRespException {
+        Integer i = iosDriver.closeAlert();
+        System.out.println(i);
+    }
 
     @AfterClass
     public static void after() throws SonicRespException {

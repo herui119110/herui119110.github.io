@@ -102,6 +102,14 @@ public class IOSDriver {
     }
 
     /**
+     *
+     * @return 1 成功 2 无弹窗可关  3 异常
+     * @throws SonicRespException
+     */
+    public Integer closeAlert() throws SonicRespException {
+        return wdaClient.closeAlert();
+    }
+    /**
      * get wda sessionId.
      *
      * @return

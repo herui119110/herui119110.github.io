@@ -25,6 +25,7 @@ public class BaseResp<T> {
     private String sessionId;
     private ErrorMsg err;
     private T value;
+    private Integer code;
 
     public void setErr(ErrorMsg err) {
         this.err = err;
@@ -32,5 +33,10 @@ public class BaseResp<T> {
 
     public void setValue(T value) {
         this.value = value;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+
     }
 }

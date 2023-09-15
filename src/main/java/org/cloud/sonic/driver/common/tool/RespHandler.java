@@ -19,6 +19,7 @@ package org.cloud.sonic.driver.common.tool;
 import cn.hutool.core.io.IORuntimeException;
 import cn.hutool.http.HttpException;
 import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.cloud.sonic.driver.common.models.BaseResp;
@@ -37,6 +38,34 @@ public class RespHandler {
 
     public BaseResp getResp(HttpRequest httpRequest) throws SonicRespException {
         return getResp(httpRequest, requestTimeout);
+    }
+
+    public BaseResp getRespV2(HttpRequest httpRequest) throws SonicRespException {
+        return getRespV2(httpRequest, requestTimeout);
+    }
+
+    public BaseResp getRespV2(HttpRequest httpRequest, int timeout) throws SonicRespException {
+        synchronized (this) {
+            try {
+                return initRespV2(httpRequest.addHeaders(initHeader()).timeout(timeout).execute());
+            } catch (HttpException | IORuntimeException e) {
+                e.printStackTrace();
+                throw new SonicRespException(e.getMessage());
+            }
+        }
+    }
+
+    private BaseResp initRespV2(HttpResponse response) {
+        String body = response.body();
+        response.getStatus();
+        BaseResp err = JSON.parseObject(body, BaseResp.class);
+        if (body.contains("traceback") || body.contains("stacktrace")) {
+            ErrorMsg errorMsg = JSONObject.parseObject(err.getValue().toString(), ErrorMsg.class);
+            err.setErr(errorMsg);
+            err.setValue(null);
+        }
+        err.setCode(response.getStatus());
+        return err;
     }
 
     public BaseResp getResp(HttpRequest httpRequest, int timeout) throws SonicRespException {

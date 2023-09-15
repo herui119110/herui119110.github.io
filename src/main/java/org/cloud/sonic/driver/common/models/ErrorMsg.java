@@ -29,4 +29,8 @@ public class ErrorMsg {
     public String getMessage() {
         return message;
     }
+
+    public String getError() {
+        return error;
+    }
 }
