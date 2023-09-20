@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(Parameterized.class)
 public class IOSDriverTest {
@@ -333,10 +334,53 @@ public class IOSDriverTest {
 
     @Test
     public void testAppDown() {
-        iosDriver.findElement(IOSSelector.XPATH)
     }
 
 
+    @Test
+    public void testSiri() throws SonicRespException, InterruptedException {
+
+
+        TimeUnit.SECONDS.sleep(5);
+        IOSElement settingTagEle = iosDriver.findElement(IOSSelector.XPATH, "//XCUIElementTypeApplication[contains(@name,'设置')]");
+        if (settingTagEle != null) {
+            IOSElement settingWifiTagEle = iosDriver.findElement(IOSSelector.XPATH, "//XCUIElementTypeStaticText[@name='Wi-Fi']");
+            if (settingWifiTagEle != null) {
+                IOSElement selectedWifiEle = iosDriver.findElement(IOSSelector.XPATH, "//XCUIElementTypeImage[contains(@name,'已选择')]");
+                if (selectedWifiEle != null) {
+                    selectedWifiEle.click();
+                    System.out.println("成功到达已连接的wifi界面");
+                    WindowSize windowSize = iosDriver.getWindowSize();
+                    int height = windowSize.getHeight();
+                    TimeUnit.SECONDS.sleep(5);
+                    //滑动到底
+                    iosDriver.swipe(windowSize.getWidth(), windowSize.getHeight(),windowSize.getWidth(), 0);
+                    iosDriver.findElement(IOSSelector.XPATH,"//XCUIElementTypeStaticText[@name='配置代理']").click();
+                    TimeUnit.SECONDS.sleep(3);
+                    iosDriver.findElement(IOSSelector.XPATH,"//XCUIElementTypeStaticText[@name='手动']").click();
+                    TimeUnit.SECONDS.sleep(3);
+                    IOSElement serverEle = iosDriver.findElement(IOSSelector.XPATH, "//XCUIElementTypeTextField[@name='服务器']");
+                    serverEle.clear();
+                    serverEle.sendKeys("192.168.1.112");
+                    IOSElement portEle = iosDriver.findElement(IOSSelector.XPATH, "//XCUIElementTypeTextField[@name='端口']");
+                    portEle.clear();
+                    portEle.sendKeys("8080");
+
+
+                }
+            }
+        }
+
+
+
+    }
+
+    @Test
+    public void testAppState() throws SonicRespException {
+        String bundleId = "com.apple.AppStore";
+        Integer i = iosDriver.appState(bundleId);
+        System.out.println(i);
+    }
     @AfterClass
     public static void after() throws SonicRespException {
         iosDriver.closeDriver();

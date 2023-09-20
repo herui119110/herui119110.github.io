@@ -230,6 +230,20 @@ public class IOSDriver {
     }
 
     /**
+     *
+     * @param bundleId app包名
+     * @return 响应数据value的含义：
+     *
+     * 1 - 应用存在但不存活 or 应用不存在、
+     * 2 - 应用存在但处于后台
+     * 4 - 应用存在并且处于前台
+     * @throws SonicRespException
+     */
+    public Integer appState(String bundleId) throws SonicRespException {
+        return wdaClient.appState(bundleId);
+    }
+
+    /**
      * perform touch action.
      *
      * @param touchActions
