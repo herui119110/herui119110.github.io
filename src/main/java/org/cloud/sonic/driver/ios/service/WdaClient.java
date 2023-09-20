@@ -117,4 +117,6 @@ public interface WdaClient {
     Integer checkExistAlert()throws SonicRespException;
 
     Integer closeAlert() throws SonicRespException;
+
+    Integer appState(String bundleId) throws SonicRespException;
 }

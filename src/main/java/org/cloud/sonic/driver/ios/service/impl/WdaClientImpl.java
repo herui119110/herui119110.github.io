@@ -590,8 +590,20 @@ public class WdaClientImpl implements WdaClient {
         return 3;
     }
 
-    public Integer appState() throws SonicRespException {
-        respHandler
+    @Override
+    public Integer appState(String bundleId) throws SonicRespException {
+        checkSessionId();
+        JSONObject data = new JSONObject();
+        data.put("bundleId", bundleId);
+        BaseResp<Integer> b = respHandler.getRespV2(HttpUtil.createPost(remoteUrl + "/session/" + sessionId + "/wda/apps/state")
+                .body(data.toJSONString())
+        );
+        if (b.getErr() == null) {
+            return b.getValue();
+        } else {
+            throw new SonicRespException(b.getErr().getMessage());
+        }
+
     }
 
 }
