@@ -590,4 +590,8 @@ public class WdaClientImpl implements WdaClient {
         return 3;
     }
 
+    public Integer appState() throws SonicRespException {
+        respHandler
+    }
+
 }

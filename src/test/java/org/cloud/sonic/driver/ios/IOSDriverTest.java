@@ -331,6 +331,12 @@ public class IOSDriverTest {
         System.out.println(i);
     }
 
+    @Test
+    public void testAppDown() {
+        iosDriver.findElement(IOSSelector.XPATH)
+    }
+
+
     @AfterClass
     public static void after() throws SonicRespException {
         iosDriver.closeDriver();
