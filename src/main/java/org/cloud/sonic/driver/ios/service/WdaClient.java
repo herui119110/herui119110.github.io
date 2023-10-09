@@ -121,4 +121,6 @@ public interface WdaClient {
     Integer appState(String bundleId) throws SonicRespException;
 
     boolean ping() ;
+
+    String getActiveAppBundleId() throws SonicRespException;
 }

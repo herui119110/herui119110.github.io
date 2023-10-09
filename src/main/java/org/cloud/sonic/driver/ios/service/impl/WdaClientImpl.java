@@ -16,6 +16,7 @@
  */
 package org.cloud.sonic.driver.ios.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.http.Method;
@@ -609,6 +610,19 @@ public class WdaClientImpl implements WdaClient {
     @Override
     public boolean ping()  {
         return respHandler.ping(HttpUtil.createRequest(Method.OPTIONS,remoteUrl + "/"));
+    }
+
+    @Override
+    public String getActiveAppBundleId() throws SonicRespException {
+        BaseResp b = respHandler.getRespV2(HttpUtil.createGet(remoteUrl + "/wda/activeAppInfo"));
+        Object value = b.getValue();
+        if (ObjectUtil.isNotEmpty(value)) {
+            JSONObject jsonObject = JSON.parseObject(b.getValue().toString());
+            String bundleId = jsonObject.getString("bundleId");
+            return bundleId;
+        }
+
+        return null;
     }
 
 

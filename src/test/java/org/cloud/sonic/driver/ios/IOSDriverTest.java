@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 @RunWith(Parameterized.class)
 public class IOSDriverTest {
     static IOSDriver iosDriver;
-    static String url = "http://localhost:8100";
+    static String url = "http://192.168.1.3:8100";
 
     @Parameterized.Parameters
     public static Object[][] data() {
@@ -380,6 +380,12 @@ public class IOSDriverTest {
         String bundleId = "com.apple.AppStore";
         Integer i = iosDriver.appState(bundleId);
         System.out.println(i);
+    }
+
+    @Test
+    public void  activeAppinfo() throws SonicRespException {
+        String activeAppBundleId = iosDriver.getActiveAppBundleId();
+        System.out.println(activeAppBundleId);
     }
     @AfterClass
     public static void after() throws SonicRespException {

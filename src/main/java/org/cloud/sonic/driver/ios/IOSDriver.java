@@ -703,4 +703,8 @@ public class IOSDriver {
         return wdaClient.ping();
     }
 
+    public String getActiveAppBundleId() throws SonicRespException {
+        return wdaClient.getActiveAppBundleId();
+    }
+
 }
