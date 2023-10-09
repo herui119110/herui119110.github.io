@@ -119,4 +119,6 @@ public interface WdaClient {
     Integer closeAlert() throws SonicRespException;
 
     Integer appState(String bundleId) throws SonicRespException;
+
+    boolean ping() ;
 }

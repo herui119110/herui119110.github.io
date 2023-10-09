@@ -606,4 +606,11 @@ public class WdaClientImpl implements WdaClient {
 
     }
 
+    @Override
+    public boolean ping()  {
+        return respHandler.ping(HttpUtil.createRequest(Method.OPTIONS,remoteUrl + "/"));
+    }
+
+
+
 }

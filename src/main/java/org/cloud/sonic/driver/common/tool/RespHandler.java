@@ -57,7 +57,6 @@ public class RespHandler {
 
     private BaseResp initRespV2(HttpResponse response) {
         String body = response.body();
-        response.getStatus();
         BaseResp err = JSON.parseObject(body, BaseResp.class);
         if (body.contains("traceback") || body.contains("stacktrace")) {
             ErrorMsg errorMsg = JSONObject.parseObject(err.getValue().toString(), ErrorMsg.class);
@@ -99,5 +98,17 @@ public class RespHandler {
         err.setErr(errorMsg);
         err.setValue(null);
         return err;
+    }
+
+    public boolean ping(HttpRequest httpRequest) {
+        synchronized (this) {
+            try {
+                HttpResponse response = httpRequest.addHeaders(initHeader()).timeout(requestTimeout).execute();
+               return response.isOk();
+            } catch (HttpException | IORuntimeException e) {
+                return false;
+
+            }
+        }
     }
 }

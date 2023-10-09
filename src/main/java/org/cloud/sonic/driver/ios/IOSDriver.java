@@ -698,4 +698,9 @@ public class IOSDriver {
     public void setAppiumSettings(JSONObject settings) throws SonicRespException {
         wdaClient.setAppiumSettings(settings);
     }
+
+    public boolean ping() {
+        return wdaClient.ping();
+    }
+
 }
