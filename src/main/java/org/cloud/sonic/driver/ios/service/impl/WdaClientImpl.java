@@ -425,9 +425,9 @@ public class WdaClientImpl implements WdaClient {
                 }
             }
         }
-        if (iosElement == null) {
-            throw new SonicRespException(errMsg);
-        }
+//        if (iosElement == null) {
+//            throw new SonicRespException(errMsg);
+//        }
         return iosElement;
     }
 
